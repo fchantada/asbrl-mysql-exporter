@@ -1,0 +1,23 @@
+---
+- name: Mysql Exporter
+   community.docker.docker_container:
+    name: "{{ CONTAINER_NAME }}"
+    image: "{{ IMAGE }}:{{ BUILD }}"
+    pull: "yes"
+    recreate: "yes"
+    env:
+      DATA_SOURCE_NAME: "{{ MYSQL_USER }}:{{ MYSQL_PASS }}@({{ MYSQL_HOST }}:{{ MYSQL_PORT }})/"
+    cpu_period: "{{ DOCKER_CPU_PERIOD | default(omit) }}"
+    cpu_quota: "{{ DOCKER_CPU_QUOTA | default(omit) }}"
+    memory: "{{ DOCKER_MEMORY | default(omit) }}"
+    state: "{{ CONTAINER_STATE }}"
+    restart_policy: "unless-stopped"
+    network_mode: "{{ DOCKER_NETWORK_MODE | default(omit) }}"
+    published_ports: "{{ DOCKER_PUBLISHED_PORTS | default(omit) }}"
+    exposed_ports: "{{ DOCKER_EXPOSED_PORTS | default(omit) }}"
+    networks: "{{ DOCKER_NETWORKS | default(omit) }}"
+    labels: "{{ DOCKER_LABELS | default(omit) }}"
+    log_driver: "{{ DOCKER_LOG_DRIVER }}"
+    log_options: "{{ DOCKER_LOG_OPTIONS }}"
+  tags:
+  - asbrl-mysql-exporter

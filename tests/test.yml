@@ -1,0 +1,21 @@
+---
+- name: Deploy
+  hosts: localhost
+  order: sorted
+  become: true
+
+  pre_tasks:
+
+  - name: copy role locally (DEBUG)
+    copy:
+      src: ../
+      dest: ./roles/ansible-postgresql-exporter
+  
+  tasks:
+
+  - name: Deploy PostgreSQL Exporter
+    include_role:
+      name: ansible-postgresql-exporter
+    vars:
+      DOCKER_CPU_QUOTA: 100000
+      DOCKER_MEMORY: 1G
