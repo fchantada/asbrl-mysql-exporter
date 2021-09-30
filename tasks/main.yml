@@ -1,6 +1,6 @@
 ---
 - name: Mysql Exporter
-   community.docker.docker_container:
+  community.docker.docker_container:
     name: "{{ CONTAINER_NAME }}"
     image: "{{ IMAGE }}:{{ BUILD }}"
     pull: "yes"
